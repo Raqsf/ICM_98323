@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Android_Aula01</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_send">Send</string>
+    <string name="reply_message">Enter Your Reply Here</string>
+    <string name="button_reply">Reply</string>
+    <string name="text_header_reply">Reply Received</string>
+</resources>
