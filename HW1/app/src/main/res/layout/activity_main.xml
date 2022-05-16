@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/num10"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:onClick="addNumber"
+        android:tag="+"
+        android:text="+"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/num7" />
+
+    <Button
+        android:id="@+id/num0"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:onClick="addNumber"
+        android:tag="0"
+        android:text="0"
+        app:layout_constraintBaseline_toBaselineOf="@+id/num10"
+        app:layout_constraintEnd_toStartOf="@+id/numCardinal"
+        app:layout_constraintStart_toEndOf="@+id/num10" />
+
+    <Button
+        android:id="@+id/num7"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:onClick="addNumber"
+        android:tag="7"
+        android:text="7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/num4" />
+
+    <Button
+        android:id="@+id/numCardinal"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="24dp"
+        android:onClick="addNumber"
+        android:tag="#"
+        android:text="#"
+        app:layout_constraintBaseline_toBaselineOf="@+id/num0"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/num8"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:onClick="addNumber"
+        android:tag="8"
+        android:text="8"
+        app:layout_constraintBaseline_toBaselineOf="@+id/num7"
+        app:layout_constraintEnd_toStartOf="@+id/contact3"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toEndOf="@+id/contact1" />
+
+    <Button
+        android:id="@+id/num9"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="24dp"
+        android:onClick="addNumber"
+        android:tag="9"
+        android:text="9"
+        app:layout_constraintBaseline_toBaselineOf="@+id/num8"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/num4"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:onClick="addNumber"
+        android:tag="4"
+        android:text="4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/num1" />
+
+    <Button
+        android:id="@+id/num5"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="24dp"
+        android:onClick="addNumber"
+        android:tag="6"
+        android:text="6"
+        app:layout_constraintBaseline_toBaselineOf="@+id/num6"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/num6"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:onClick="addNumber"
+        android:tag="5"
+        android:text="5"
+        app:layout_constraintBaseline_toBaselineOf="@+id/num4"
+        app:layout_constraintEnd_toStartOf="@+id/contact3"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toEndOf="@+id/contact1" />
+
+    <Button
+        android:id="@+id/num1"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
+        android:onClick="addNumber"
+        android:tag="1"
+        android:text="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contact1" />
+
+    <Button
+        android:id="@+id/num2"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:onClick="addNumber"
+        android:tag="2"
+        android:text="2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/num1"
+        app:layout_constraintEnd_toStartOf="@+id/contact3"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toEndOf="@+id/contact1" />
+
+    <Button
+        android:id="@+id/num3"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="24dp"
+        android:onClick="addNumber"
+        android:tag="3"
+        android:text="3"
+        app:layout_constraintBaseline_toBaselineOf="@+id/num2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/contact1"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:onClick="addDial"
+        android:tag="contact1"
+        android:textSize="10sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/contact2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/contact3"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="24dp"
+        android:onClick="addDial"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete" />
+
+    <Button
+        android:id="@+id/contact2"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:onClick="addDial"
+        android:textSize="10sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/contact3"
+        app:layout_constraintEnd_toStartOf="@+id/contact3"
+        app:layout_constraintStart_toEndOf="@+id/contact1" />
+
+    <Button
+        android:id="@+id/call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:onClick="openPhoneDialer"
+        android:text="Call"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/num0" />
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="delete"
+        android:text="Delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/delete"
+        app:layout_constraintEnd_toStartOf="@+id/delete"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
