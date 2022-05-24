@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">HW2</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="main_acticity_title">Select a local</string>
 </resources>

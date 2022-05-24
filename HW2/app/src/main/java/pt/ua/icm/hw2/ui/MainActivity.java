@@ -1,18 +1,20 @@
 package pt.ua.icm.hw2.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
     private RegionsAdapter adapter;
     private RecyclerView recyclerView;
-    private TextView feedback;
+//    private TextView feedback;
+
+    private boolean mTwoPane = false;
 
     WeatherClient client = new WeatherClient();
     private HashMap<String, Region> regions;
@@ -50,22 +54,25 @@ public class MainActivity extends AppCompatActivity {
 
         generateRegionsList();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        if (findViewById(R.id.weather_detail_container) != null) {
+            mTwoPane = true;
+        }
+        /*FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("MAIN", "CLICKED");
                 //callWeatherForecastForACityStep1("Aveiro");
-                getRegions();
+                //getRegions();
             }
-        });
+        });*/
 
-        feedback = findViewById(R.id.tvFeedback);
+//        feedback = findViewById(R.id.tvFeedback);
     }
 
-    private void generateDataList(List<String> regions) {
-        recyclerView = findViewById(R.id.recyclerview);
-        adapter = new RegionsAdapter(this, regions);
+    private void generateDataList(List<Region> regions) {
+        recyclerView = findViewById(R.id.weather_list);
+        adapter = new RegionsAdapter(/*this, */regions);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -85,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 for(Region region : regionGroup.getRegions()) {
                     regions.put(region.getLocal(), region);
                 }
-                generateDataList(new ArrayList(regions.keySet()));
+                generateDataList(new ArrayList(regions.values()));
                 //listener.receiveRegionsList(regions);
             }
 
@@ -116,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         });*/
     }
 
-    private void getRegions() {
+    /*private void getRegions() {
         Log.d("MAIN", "GET REGIONS");
         client.getRegionsList(new RegionResultsObserver() {
 
@@ -135,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 feedback.append("Failed to get cities list!");
             }
         });
-    }
+    }*/
 /*
     private void callWeatherForecastForACityStep1(String city) {
 
@@ -194,4 +201,106 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }*/
+
+    class RegionsAdapter extends
+            RecyclerView.Adapter<RegionsAdapter.RegionsViewHolder> {
+
+        private List<Region> regions;
+        //private Context context;
+        //private LayoutInflater mInflater;
+
+        public RegionsAdapter(/*Context context, */List<Region> regions) {
+            //this.context = context;
+            this.regions = regions;
+            //mInflater = LayoutInflater.from(context);
+        }
+
+        @NonNull
+        @Override
+        public RegionsAdapter.RegionsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View mItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.region_list_content,
+                    parent, false);
+            return new RegionsAdapter.RegionsViewHolder(mItemView, this);
+
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull RegionsAdapter.RegionsViewHolder holder, int position) {
+            Region mCurrent = regions.get(position);
+            holder.wordItemView.setText(mCurrent.getLocal());
+
+            holder.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("MAIN", "ONCLICK");
+                    if (mTwoPane) {
+                        Log.d("MAIN", "BIG");
+                        int selectedRegion = mCurrent.getGlobalLocal();
+                        //selectedRegion = 1010500;
+                        WeatherFragment fragment = WeatherFragment.newInstance(selectedRegion);
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.weather_detail_container, fragment)
+                                .addToBackStack(null)
+                                .commit();
+                        /*int selectedSong = holder.getAdapterPosition();
+                        SongDetailFragment fragment =
+                                SongDetailFragment.newInstance(selectedSong);
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.song_detail_container, fragment)
+                                .addToBackStack(null)
+                                .commit();*/
+                    } else {
+                        Log.d("MAIN", "SMALL");
+                        Context context = v.getContext();
+                        Intent intent = new Intent(context, WeatherByRegionActivity.class);
+                        /*intent.putExtra(SongUtils.SONG_ID_KEY,
+                                holder.getAdapterPosition());*/
+                        // TODO: passar id da região
+                        intent.putExtra("regionId", mCurrent.getGlobalLocal());
+                        context.startActivity(intent);
+                    }
+                }
+            });
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return regions.size();
+        }
+
+        class RegionsViewHolder extends RecyclerView.ViewHolder {
+
+            final TextView wordItemView;
+            final View mView;
+            final RegionsAdapter mAdapter;
+
+            public RegionsViewHolder(View itemView, RegionsAdapter adapter) {
+                super(itemView);
+                mView = itemView;
+                wordItemView = (TextView) itemView.findViewById(R.id.region);
+                this.mAdapter = adapter;
+                //itemView.setOnClickListener(this);
+            }
+
+        /*@Override
+        public void onClick(View view) {
+
+        }*/
+
+        /*@Override
+        public void onClick(View view) {
+            // Get the position of the item that was clicked.
+            int mPosition = getLayoutPosition();
+            // Use that to access the affected item in mWordList.
+            String element = mWordList.get(mPosition);
+            // Change the word in the mWordList.
+            mWordList.set(mPosition, "Clicked! " + element);
+            // Notify the adapter that the data has changed so it can
+            // update the RecyclerView to display the data.
+            mAdapter.notifyDataSetChanged();
+        }*/
+        }
+
+    }
 }
