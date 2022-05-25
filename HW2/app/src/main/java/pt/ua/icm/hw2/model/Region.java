@@ -3,6 +3,8 @@ package pt.ua.icm.hw2.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Comparator;
+
 public class Region {
 
     @Expose
@@ -60,5 +62,16 @@ public class Region {
         this.longitude = longitude;
     }
 
+    public static Comparator<Region> RegionNameComparator = new Comparator<Region>() {
 
+        public int compare(Region r1, Region r2) {
+            String RegionName1 = r1.getLocal().toUpperCase();
+            String RegionName2 = r2.getLocal().toUpperCase();
+
+            //ascending order
+            return RegionName1.compareTo(RegionName2);
+
+            //descending order
+            //return StudentName2.compareTo(StudentName1);
+        }};
 }

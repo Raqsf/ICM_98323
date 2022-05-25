@@ -33,13 +33,6 @@ public class WeatherByRegionActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.weather_detail_container, fragment)
                     .commit();
-            /*int selectedSong =
-                    getIntent().getIntExtra(SongUtils.SONG_ID_KEY, 0);
-            SongDetailFragment fragment =
-                    SongDetailFragment.newInstance(selectedSong);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.song_detail_container, fragment)
-                    .commit();*/
         }
     }
 
